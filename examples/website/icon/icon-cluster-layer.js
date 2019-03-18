@@ -55,7 +55,17 @@ export default class IconClusterLayer extends CompositeLayer {
 
   renderLayers() {
     const {z, version} = this.state;
-    const {data, iconAtlas, iconMapping, sizeScale, getPosition, onHover, onClick} = this.props;
+    const {
+      data,
+      iconAtlas,
+      iconMapping,
+      sizeMinPixels,
+      sizeMaxPixels,
+      sizeScale,
+      getPosition,
+      onHover,
+      onClick
+    } = this.props;
 
     return new IconLayer(
       this.getSubLayerProps({
@@ -64,9 +74,14 @@ export default class IconClusterLayer extends CompositeLayer {
         iconAtlas,
         iconMapping,
         sizeScale,
+        sizeMinPixels,
+        sizeMaxPixels,
         getPosition,
         getIcon: d => d.zoomLevels[z] && d.zoomLevels[z].icon,
-        getSize: d => d.zoomLevels[z] && d.zoomLevels[z].size,
+        getSize: d => {
+          const size = d.zoomLevels[z] && d.zoomLevels[z].size;
+          return Number(size) * 18040;
+        },
         onHover,
         onClick,
         updateTriggers: {

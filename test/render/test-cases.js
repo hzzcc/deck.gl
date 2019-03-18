@@ -487,11 +487,13 @@ export const TEST_CASES = [
         data: dataSamples.points,
         iconAtlas: ICON_ATLAS,
         iconMapping: dataSamples.iconAtlas,
-        sizeScale: 12,
+        sizeScale: 12 * 21.34321226467833,
         getPosition: d => d.COORDINATES,
         getColor: d => [64, 64, 72],
         getIcon: d => (d.PLACEMENT === 'SW' ? 'marker' : 'marker-warning'),
         getSize: d => (d.RACKS > 2 ? 2 : 1),
+        sizeMinPixels: 1,
+        sizeMaxPixels: 2048,
         opacity: 0.8,
         pickable: true
       })
@@ -520,13 +522,15 @@ export const TEST_CASES = [
         data: dataSamples.points,
         iconAtlas: ICON_ATLAS,
         iconMapping: dataSamples.iconAtlas,
-        sizeScale: 12,
+        sizeScale: 12 * 21.34321226467833,
         coordinateSystem: COORDINATE_SYSTEM.LNGLAT_DEPRECATED,
         fp64: true,
         getPosition: d => d.COORDINATES,
         getColor: d => [64, 64, 72],
         getIcon: d => (d.PLACEMENT === 'SW' ? 'marker' : 'marker-warning'),
         getSize: d => (d.RACKS > 2 ? 2 : 1),
+        sizeMinPixels: 1,
+        sizeMaxPixels: 2048,
         opacity: 0.8,
         pickable: true
       })
@@ -550,7 +554,7 @@ export const TEST_CASES = [
         data: dataSamples.points,
         iconAtlas: ICON_ATLAS,
         iconMapping: dataSamples.iconAtlas,
-        sizeScale: 12,
+        sizeScale: 12 * 21.34321226467833,
         coordinateSystem: COORDINATE_SYSTEM.LNGLAT_DEPRECATED,
         fp64: true,
         getPosition: d => d.COORDINATES,
@@ -566,6 +570,8 @@ export const TEST_CASES = [
           });
         },
         getSize: d => (d.RACKS > 2 ? 2 : 1),
+        sizeMinPixels: 1,
+        sizeMaxPixels: 2048,
         opacity: 0.8,
         pickable: true
       })
@@ -961,7 +967,7 @@ export const TEST_CASES = [
         getColor: x => [153, 0, 0],
         getSize: x => 16,
         getAngle: x => 0,
-        sizeScale: 1,
+        sizeScale: 21.34321226467833,
         getTextAnchor: x => 'start',
         getAlignmentBaseline: x => 'center',
         getPixelOffset: x => [10, 0]
@@ -990,7 +996,7 @@ export const TEST_CASES = [
         getColor: x => [153, 0, 0],
         getSize: x => 16,
         getAngle: x => 0,
-        sizeScale: 1,
+        sizeScale: 21.34321226467833,
         getTextAnchor: x => 'start',
         getAlignmentBaseline: x => 'center',
         getPixelOffset: x => [10, 0]

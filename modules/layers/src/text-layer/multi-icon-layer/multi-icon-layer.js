@@ -28,6 +28,9 @@ const DEFAULT_GAMMA = 0.2;
 const DEFAULT_BUFFER = 192.0 / 256;
 
 const defaultProps = {
+  sizeMinPixels: 0,
+  sizeMaxPixels: Number.MAX_SAFE_INTEGER,
+
   getShiftInQueue: {type: 'accessor', value: x => x.shift || 0},
   getLengthOfQueue: {type: 'accessor', value: x => x.len || 1},
   // 1: left, 0: middle, -1: right
@@ -74,14 +77,16 @@ export default class MultiIconLayer extends IconLayer {
   }
 
   draw({uniforms}) {
-    const {sdf} = this.props;
+    const {sdf, sizeMinPixels, sizeMaxPixels} = this.props;
     super.draw({
       uniforms: Object.assign({}, uniforms, {
         // Refer the following doc about gamma and buffer
         // https://blog.mapbox.com/drawing-text-with-signed-distance-fields-in-mapbox-gl-b0933af6f817
         buffer: DEFAULT_BUFFER,
         gamma: DEFAULT_GAMMA,
-        sdf: Boolean(sdf)
+        sdf: Boolean(sdf),
+        sizeMinPixels,
+        sizeMaxPixels
       })
     });
   }

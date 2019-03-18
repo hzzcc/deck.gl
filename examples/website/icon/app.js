@@ -21,6 +21,23 @@ export const INITIAL_VIEW_STATE = {
   bearing: 0
 };
 
+const CONTROL_PANEL_STYLE = {
+  zIndex: 1000,
+  position: 'absolute',
+  top: '0',
+  right: '0',
+  maxWidth: '320px',
+  background: '#fff',
+  boxShadow: '0 2px 4px rgba(0,0,0,0.3)',
+  padding: '12px 24px',
+  margin: '20px',
+  fontSize: '11px',
+  lineHeight: '2',
+  color: '#6b6b76',
+  textTransform: 'uppercase',
+  outline: 'none'
+};
+
 const stopPropagation = evt => evt.stopPropagation();
 
 /* eslint-disable react/no-deprecated */
@@ -32,12 +49,14 @@ export class App extends Component {
       x: 0,
       y: 0,
       hoveredItems: null,
-      expanded: false
+      expanded: false,
+      showCluster: true
     };
     this._onHover = this._onHover.bind(this);
     this._onClick = this._onClick.bind(this);
     this._closePopup = this._closePopup.bind(this);
     this._renderhoveredItems = this._renderhoveredItems.bind(this);
+    this._renderControlPanel = this._renderControlPanel.bind(this);
   }
 
   _onHover(info) {
@@ -47,7 +66,7 @@ export class App extends Component {
 
     const {x, y, object} = info;
     const z = info.layer.state.z;
-    const {showCluster = true} = this.props;
+    const {showCluster} = this.state;
 
     let hoveredItems = null;
 
@@ -124,9 +143,9 @@ export class App extends Component {
       data = DATA_URL,
       iconMapping = 'data/location-icon-mapping.json',
       iconAtlas = 'data/location-icon-atlas.png',
-      showCluster = true,
       viewState
     } = this.props;
+    const {showCluster} = this.state;
 
     const layerProps = {
       data,
@@ -137,6 +156,8 @@ export class App extends Component {
       iconMapping,
       onHover: this._onHover,
       onClick: this._onClick,
+      sizeMinPixels: 0,
+      sizeMaxPixels: 2000000,
       sizeScale: 60
     };
 
@@ -148,10 +169,26 @@ export class App extends Component {
           ...layerProps,
           id: 'icon',
           getIcon: d => 'marker',
-          getSize: size
+          getSize: size * 18040
         });
 
     return [layer];
+  }
+
+  _renderControlPanel() {
+    return (
+      <div style={CONTROL_PANEL_STYLE}>
+        <div key="cluster" style={{display: 'flex', alignItem: 'center'}}>
+          <label>Show Cluster</label>
+          <input
+            style={{marginLeft: 6}}
+            type="checkbox"
+            checked={this.state.showCluster}
+            onChange={_ => this.setState({showCluster: !this.state.showCluster})}
+          />
+        </div>
+      </div>
+    );
   }
 
   render() {
@@ -174,6 +211,7 @@ export class App extends Component {
         )}
 
         {this._renderhoveredItems}
+        {this._renderControlPanel}
       </DeckGL>
     );
   }
