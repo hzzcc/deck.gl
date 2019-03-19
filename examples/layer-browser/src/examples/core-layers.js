@@ -66,7 +66,7 @@ const IconLayerExample = {
     getPosition: d => d.COORDINATES,
     getColor: d => [64, 64, 72],
     getIcon: d => (d.PLACEMENT === 'SW' ? 'marker' : 'marker-warning'),
-    getSize: d => (d.RACKS > 2 ? 2 * 21.34321226467833 : 21.34321226467833),
+    getSize: d => (d.RACKS > 2 ? 40 : 20),
     sizeMinPixels: 1,
     sizeMaxPixels: 2048,
     sizeScale: 24,
@@ -102,7 +102,7 @@ const IconLayerAutoPackingExample = {
         mask: false
       };
     },
-    getSize: d => (d.RACKS > 2 ? 2 * 21.34321226467833 : 21.34321226467833),
+    getSize: d => (d.RACKS > 2 ? 40 : 20),
     sizeMinPixels: 1,
     sizeMaxPixels: 2048,
     opacity: 0.8,
@@ -488,7 +488,7 @@ const TextLayerExample = {
   },
   props: {
     id: 'textgetAnchorX-layer',
-    sizeScale: 21.34321226467833,
+    sizeScale: 20,
     fontFamily: 'Monaco',
     fontSettings: {},
     autoHighlight: true,

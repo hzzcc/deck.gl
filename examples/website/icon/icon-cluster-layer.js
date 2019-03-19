@@ -78,10 +78,7 @@ export default class IconClusterLayer extends CompositeLayer {
         sizeMaxPixels,
         getPosition,
         getIcon: d => d.zoomLevels[z] && d.zoomLevels[z].icon,
-        getSize: d => {
-          const size = d.zoomLevels[z] && d.zoomLevels[z].size;
-          return Number(size) * 18040;
-        },
+        getSize: d => d.zoomLevels[z] && d.zoomLevels[z].size,
         onHover,
         onClick,
         updateTriggers: {
@@ -119,7 +116,7 @@ export default class IconClusterLayer extends CompositeLayer {
     tree.load(data);
 
     for (let z = 0; z <= 20; z++) {
-      const radius = sizeScale / Math.sqrt(2) / Math.pow(2, z);
+      const radius = sizeScale / Math.pow(2, 15) / Math.pow(2, z);
 
       data.forEach(p => {
         if (p.zoomLevels[z] === undefined) {

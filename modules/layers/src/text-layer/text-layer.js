@@ -271,8 +271,8 @@ export default class TextLayer extends CompositeLayer {
         getPixelOffset: this._getAccessor(getPixelOffset),
         fp64,
         sizeScale: sizeScale * scale,
-        sizeMinPixels,
-        sizeMaxPixels,
+        sizeMinPixels: sizeMinPixels * scale,
+        sizeMaxPixels: sizeMaxPixels * scale,
 
         transitions: transitions && {
           getPosition: transitions.getPosition,

@@ -56,7 +56,7 @@ vec2 rotate_by_angle(vec2 vertex, float angle) {
   return rotationMatrix * vertex;
 }
 
-void main(void) {  
+void main(void) {
   vec2 iconSize = instanceIconFrames.zw;
   // convert size in meters to pixels, then scaled and clamp
   float instanceScaledSizePixels = clamp(
@@ -65,7 +65,7 @@ void main(void) {
   );
   // scale icon height to match instanceSize
   float instanceScale = iconSize.y == 0.0 ? 0.0 : instanceScaledSizePixels / iconSize.y;
-  
+
   // scale and rotate vertex in "pixel" value and convert back to fraction in clipspace
   vec2 pixelOffset = positions / 2.0 * iconSize + instanceOffsets;
 
