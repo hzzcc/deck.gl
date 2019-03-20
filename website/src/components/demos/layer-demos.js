@@ -220,7 +220,8 @@ export const TextLayerDemo = createLayerDemoClass({
 
 export const TileLayerDemo = createLayerDemoClass({
   Layer: TileLayer,
-  dataUrl: `${DATA_URI}/sf-bike-parking.json`,
+  formatTooltip: f => JSON.stringify(f.properties),
+  allowMissingData: true,
   props: {
     stroked: false,
 
